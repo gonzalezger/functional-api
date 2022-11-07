@@ -1,12 +1,14 @@
 import { FastifyInstance } from 'fastify';
+import { getTodoSchema } from './schemas/get-todo.schema';
+import { GetTodoRequest } from './todo.handler';
 
 export default (fastify: FastifyInstance, _: any, next: any) => {
   // TODO: esto deberia ser parte del handler en si??? (todo.handler.ts)
-  fastify.get<{ Params: { id: number } }>(
+  fastify.get<{ Params: GetTodoRequest }>(
     '/:id',
     {
       schema: {
-        params: { type: 'object', properties: { id: { type: 'integer' } } },
+        params: getTodoSchema,
       },
     },
     async (req) => {
